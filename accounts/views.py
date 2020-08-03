@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -13,7 +13,8 @@ def index(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            return HttpResponse("Working")
+            login(request, user)
+            return HttpResponseRedirect(reverse('todoapp:index'))
         else:
             return HttpResponseRedirect(reverse('accounts:login'))
     else:
@@ -25,9 +26,13 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("working")
+            return HttpResponseRedirect(reverse('accounts:login'))
     else:
         form = UserCreationForm()
     context = {'form': form}
 
     return render(request, 'accounts/register.html', context)
+
+
+def logout_view(request):
+    logout(request)
