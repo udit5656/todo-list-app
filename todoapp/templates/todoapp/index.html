@@ -17,20 +17,6 @@
     <div class="headline ">
         A To-do task list
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg">
-                Most Priority Task
-            </div>
-            <div class="col-lg">
-                {{task_list.0.task_text}}
-            </div>
-            <div class="col-lg">
-                {{task_list.0.task_deadline|timeuntil}}
-            </div>
-        </div>
-    </div>
-    <div class="list-group">
         <div class="row">
             <div class="list-group-item col">
                 <h2>List of all tasks to be done</h2>
@@ -39,18 +25,20 @@
                 <h2>Time Left</h2>
             </div>
         </div>
-        {% for task in task_list%}
-        <div class="row">
-            <div class="list-group-item col">
-                    {{task.task_text}}
+        {% if task_list %}
+            {% for task in task_list%}
+            <div class="row">
+                <div class="list-group-item col">
+                        {{task.task_text}}
+                </div>
+                <div class="col">
+                     {{task.task_deadline|timeuntil}}
+                </div>
             </div>
-            <div class="col">
-                 {{task.task_deadline|timeuntil}}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        {% endif %}
     <form action="{% url 'todoapp:add_task'%}">
+
         <div class="submit-button">
             <input type="submit" value="Add new task">
         </div>
