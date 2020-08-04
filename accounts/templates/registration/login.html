@@ -9,7 +9,7 @@
         {%csrf_token%}
         {{form}}
         <input type="submit" value="log in">
-
     </form>
+    <a href="{% url 'accounts:register' %}">Not a user? Sign Up</a>
 </body>
 </html>

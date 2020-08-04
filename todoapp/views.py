@@ -31,6 +31,7 @@ def add_task(request):
             task.user = request.user
             task.save()
             return HttpResponseRedirect(reverse('todoapp:index'))
+        return render(request,'todoapp/addtask.html',{'form':form})
     else:
         form = TaskAddForm()
         context = {'form': form}
