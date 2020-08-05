@@ -6,36 +6,50 @@
 
 {% block content %}
 
-    <div class="headline ">
-        A To-do task list
-    </div>
+    <div class="container">
         <div class="row">
-            <div class="list-group-item col">
-                <h2>List of all tasks to be done</h2>
+            <div class="col">
+            </div>
+            <div class="col-6">
+                <h2>A To-do task list App</h2>
             </div>
             <div class="col">
-                <h2>Time Left</h2>
             </div>
         </div>
-        {% if task_list %}
-            {% for task in task_list%}
-            <div class="row">
-                <div class="list-group-item col">
-                        {{task.task_text}}
-                        <form action="{% url 'todoapp:remove_task' task.id%}">
-                            <input type="submit" value="Done">
-                        </form>
-                </div>
-                <div class="col">
-                     {{task.task_deadline|timeuntil}}
-                </div>
-            </div>
-            {% endfor %}
-        {% endif %}
-    <form action="{% url 'todoapp:add_task'%}">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
 
-        <div class="submit-button">
-            <input type="submit" value="Add new task">
+            </div>
+            <div class="col-6">
+                <h2>List of all tasks to be done</h2>
+                {% if task_list %}
+                    {% for task in task_list%}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                {{task.task_text}}
+                            </div>
+                            <div class="col">
+                                Time Left {{task.task_deadline|timeuntil}}
+                                <form action="{% url 'todoapp:remove_task' task.id%}">
+                                    <input class="btn btn-primary" type="submit" value="Done">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <form action="{% url 'todoapp:add_task'%}">
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Add new task">
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+
+            </div>
         </div>
-    </form>
+    </div>
 {% endblock content %}

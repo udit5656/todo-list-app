@@ -1,3 +1,6 @@
+{% load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/bootstrap-reboot.css' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +8,36 @@
     <title>Login Page</title>
 </head>
 <body>
-    <form method="post" action="{% url 'accounts:index'%}">
-        {%csrf_token%}
-        {{form}}
-        <input type="submit" value="log in">
-    </form>
-    <a href="{% url 'accounts:register' %}">Not a user? Sign Up</a>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <div class="container">
+                    <form method="post" action="{% url 'accounts:index'%}">
+                        {%csrf_token%}
+                        {{ form.non_field_errors }}
+                        {% for field in form %}
+                            <div class="row">
+                                {{field.errors}}
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{field.label_tag}}
+                                </div>
+                                <div class="col">
+                                    {{field}}
+                                </div>
+                            </div>
+                        {% endfor%}
+                        <div class="row">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row"><a href="{% url 'accounts:register' %}">Not a user? Sign Up</a></div>
+    </div>
 </body>
 </html>

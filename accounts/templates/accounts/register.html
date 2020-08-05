@@ -4,9 +4,34 @@
 {% endblock%}
 
 {% block content %}
-    <form method="post" action="{% url 'accounts:register'%}">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="sign up">
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <div class="container">
+                    <form method="post" action="{% url 'accounts:register'%}">
+                        {%csrf_token%}
+                        {{ form.non_field_errors }}
+                        {% for field in form %}
+                            <div class="row">
+                                {{field.errors}}
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{field.label_tag}}
+                                </div>
+                                <div class="col">
+                                    {{field}}
+                                </div>
+                            </div>
+                        {% endfor%}
+                        <div class="row">
+                            <input class="btn btn-primary" type="submit" value="Sign Up">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
 {% endblock content%}
