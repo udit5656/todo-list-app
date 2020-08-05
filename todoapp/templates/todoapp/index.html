@@ -22,6 +22,9 @@
             <div class="row">
                 <div class="list-group-item col">
                         {{task.task_text}}
+                        <form action="{% url 'todoapp:remove_task' task.id%}">
+                            <input type="submit" value="Done">
+                        </form>
                 </div>
                 <div class="col">
                      {{task.task_deadline|timeuntil}}

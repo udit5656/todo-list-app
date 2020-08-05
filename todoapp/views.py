@@ -31,8 +31,13 @@ def add_task(request):
             task.user = request.user
             task.save()
             return HttpResponseRedirect(reverse('todoapp:index'))
-        return render(request,'todoapp/addtask.html',{'form':form})
+        return render(request, 'todoapp/addtask.html', {'form': form})
     else:
         form = TaskAddForm()
         context = {'form': form}
         return render(request, 'todoapp/addtask.html', context)
+
+
+def remove_task(request, task_id):
+    Task.objects.get(pk=task_id).delete()
+    return HttpResponseRedirect(reverse('todoapp:index'))
