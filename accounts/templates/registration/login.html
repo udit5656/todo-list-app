@@ -6,6 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    <style>
+        .row{
+            margin-top:10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -30,14 +35,14 @@
                             </div>
                         {% endfor%}
                         <div class="row">
-                            <input class="btn btn-primary" type="submit" value="Submit">
+                            <input class="btn btn-primary mr-5 btn-block my-3" type="submit" value="Submit">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col"></div>
         </div>
-        <div class="row"><a href="{% url 'accounts:register' %}">Not a user? Sign Up</a></div>
+        <div class="row"><a href="{% url 'accounts:register' %}"><input class="btn btn-outline-dark mx-5" type="submit" value="Not a user? Sign Up"></a></div>
     </div>
 </body>
 </html>
